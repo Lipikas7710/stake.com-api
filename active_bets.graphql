@@ -1,0 +1,43 @@
+# Get currently active (open) sport bets
+# Requires: x-access-token header
+#
+# Filter by active: true to get only pending bets.
+# potentialMultiplier shows the total odds if all outcomes win.
+
+query GetActiveBets($limit: Int) {
+  user {
+    sportBetList(limit: $limit, offset: 0) {
+      id
+      bet {
+        ... on SportBet {
+          id
+          amount
+          currency
+          status
+          active
+          potentialMultiplier
+          createdAt
+          outcomes {
+            odds
+            fixtureName
+            outcome {
+              name
+            }
+            fixture {
+              name
+              status
+              tournament {
+                category {
+                  sport {
+                    name
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

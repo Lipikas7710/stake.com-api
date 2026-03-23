@@ -1,0 +1,40 @@
+# Get incoming and outgoing tips with pagination
+# Requires: x-access-token header
+#
+# tipList     — tips received by you
+# sendTipList — tips sent by you
+#
+# Both support limit/offset pagination.
+# sendUser / receiveUser contain the counterparty's Stake username.
+
+query GetIncomingTips($limit: Int, $offset: Int) {
+  user {
+    tipList(limit: $limit, offset: $offset) {
+      amount
+      currency
+      createdAt
+      sendUser {
+        name
+      }
+      receiveUser {
+        name
+      }
+    }
+  }
+}
+
+query GetOutgoingTips($limit: Int, $offset: Int) {
+  user {
+    sendTipList(limit: $limit, offset: $offset) {
+      amount
+      currency
+      createdAt
+      sendUser {
+        name
+      }
+      receiveUser {
+        name
+      }
+    }
+  }
+}

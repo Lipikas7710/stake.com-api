@@ -1,0 +1,22 @@
+# Get transaction history (deposits, withdrawals, tips, etc.)
+# Requires: x-access-token header
+#
+# Variables:
+#   $limit  — results per page
+#   $offset — pagination offset
+#
+# Transaction types include:
+#   deposit, withdrawal, tip, referral, bonus, rakeback, etc.
+
+query GetTransactions($limit: Int, $offset: Int) {
+  user {
+    transactions(limit: $limit, offset: $offset) {
+      id
+      amount
+      currency
+      createdAt
+      type
+      status
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# Get all currency balances for authenticated user
+# Requires: x-access-token header with your Stake API token
+#
+# Returns available balance for every currency on the platform.
+# Use the `available.amount` field for the spendable balance.
+
+query GetUserBalance {
+  user {
+    id
+    name
+    balances {
+      available {
+        amount
+        currency
+      }
+      vault {
+        amount
+        currency
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+# Get paginated sport bet history for authenticated user
+# Requires: x-access-token header
+#
+# Variables:
+#   $limit  — number of bets per page (max ~40 recommended to avoid timeout)
+#   $offset — pagination offset (0, 40, 80, ...)
+#
+# Key fields:
+#   bet.status            — "settled" | "cashout" | "active"
+#   outcomes[].status     — "won" | "lost" | "cancelled"
+#   outcomes[].outcome.payout — 1 = win, 0 = loss (reliable fallback)
+#   bet.payoutMultiplier  — actual multiplier applied (>1 means profit)
+
+query GetBetHistory($limit: Int, $offset: Int) {
+  user {
+    sportBetList(limit: $limit, offset: $offset) {
+      id
+      iid
+      bet {
+        ... on SportBet {
+          id
+          amount
+          currency
+          status
+          payout
+          payoutMultiplier
+          potentialMultiplier
+          createdAt
+          updatedAt
+          outcomes {
+            odds
+            status
+            fixtureName
+            outcome {
+              name
+              payout
+            }
+            fixture {
+              name
+              status
+              tournament {
+                name
+                category {
+                  name
+                  sport {
+                    name
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

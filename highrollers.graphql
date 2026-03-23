@@ -1,0 +1,49 @@
+# Get highroller sport bets (public feed — no token required)
+# Requires: NO authentication
+#
+# highrollerSportBets returns the largest recent bets on the platform.
+# Use limit/offset for pagination (max ~25 per request recommended).
+#
+# bettor.name — Stake username of the bettor
+# amount      — bet size in the bet's currency
+# Use a price API (e.g. Binance) to convert to USD.
+
+query GetHighrollers($limit: Int, $offset: Int) {
+  highrollerSportBets(limit: $limit, offset: $offset) {
+    bet {
+      ... on SportBet {
+        id
+        amount
+        currency
+        status
+        payout
+        payoutMultiplier
+        potentialMultiplier
+        createdAt
+        user {
+          name
+        }
+        outcomes {
+          odds
+          fixtureName
+          outcome {
+            name
+          }
+          fixture {
+            name
+            status
+            tournament {
+              name
+              category {
+                sport {
+                  name
+                  slug
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

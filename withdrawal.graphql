@@ -1,0 +1,68 @@
+# Full withdrawal flow — 3 steps
+# Requires: x-access-token header
+#
+# Step 1: Get available currencies and networks with fees
+# Step 2: Request email confirmation code
+# Step 3: Execute withdrawal with OTP code
+#
+# IMPORTANT: withdrawal requires email OTP confirmation.
+# The OTP is sent to the email registered on your Stake account.
+# Without the OTP, createWithdrawal will return an error.
+
+# ── Step 1: Get withdrawal settings (currencies + chains + fees) ──────────────
+
+query GetWithdrawalSettings {
+  getCurrencySettings {
+    currency
+    chains {
+      name
+      withdrawalFee
+      minWithdrawal
+      maxWithdrawal
+    }
+  }
+}
+
+# ── Step 2: Send email OTP ────────────────────────────────────────────────────
+# Call this before createWithdrawal to trigger the email.
+# Use the address and currency/chain you plan to withdraw to.
+
+mutation SendWithdrawalEmail(
+  $currency: CurrencyEnum!
+  $chain: String!
+  $address: String!
+  $amount: Float!
+) {
+  sendWalletWithdrawalEmail(
+    currency: $currency
+    chain: $chain
+    address: $address
+    amount: $amount
+  ) {
+    success
+  }
+}
+
+# ── Step 3: Create withdrawal ─────────────────────────────────────────────────
+
+mutation CreateWithdrawal(
+  $amount: Float!
+  $currency: CurrencyEnum!
+  $address: String!
+  $chain: String!
+  $otp: String!
+) {
+  createWithdrawal(
+    amount: $amount
+    currency: $currency
+    address: $address
+    chain: $chain
+    otp: $otp
+  ) {
+    id
+    hash
+    amount
+    currency
+    createdAt
+  }
+}

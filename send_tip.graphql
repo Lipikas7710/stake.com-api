@@ -1,0 +1,27 @@
+# Send a tip to another Stake user
+# Requires: x-access-token header
+#
+# Step 1: find the target user's ID by their username
+# Step 2: call sendTip mutation with userId + amount + currency
+#
+# Note: you cannot tip yourself.
+# Minimum tip amount varies by currency.
+
+query SearchUserByName($name: String!) {
+  userSearch(name: $name) {
+    id
+    name
+  }
+}
+
+mutation SendTip($userId: String!, $amount: Float!, $currency: CurrencyEnum!) {
+  sendTip(userId: $userId, amount: $amount, currency: $currency) {
+    id
+    amount
+    currency
+    createdAt
+    receiveUser {
+      name
+    }
+  }
+}

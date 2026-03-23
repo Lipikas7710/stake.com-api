@@ -1,0 +1,67 @@
+# Get trending sport bets (public feed — no token required)
+# Requires: NO authentication
+#
+# sportTrendingBets returns currently popular bets across the platform.
+# Useful for tracking what markets players are most active on right now.
+
+query GetTrendingBets {
+  sportTrendingBets {
+    bet {
+      ... on SportBet {
+        id
+        amount
+        currency
+        potentialMultiplier
+        createdAt
+        outcomes {
+          odds
+          fixtureName
+          outcome {
+            name
+          }
+          fixture {
+            name
+            status
+            tournament {
+              name
+              category {
+                sport {
+                  name
+                  slug
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+# Get trending matches (for Live Lines monitoring)
+
+query GetTrendingMatches {
+  sportHomepageTrendingMatches {
+    id
+    name
+    status
+    tournament {
+      name
+      category {
+        sport {
+          name
+          slug
+        }
+      }
+    }
+    markets {
+      id
+      name
+      outcomes {
+        id
+        name
+        odds
+      }
+    }
+  }
+}
